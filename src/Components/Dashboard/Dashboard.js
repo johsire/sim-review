@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Product from '../Product/Product'
 
 class Dashboard extends Component {
@@ -8,7 +8,7 @@ class Dashboard extends Component {
         this.state = {
 
         }
-    }
+    };
 
     render () {
         let{productInventory} = this.props
@@ -17,8 +17,8 @@ class Dashboard extends Component {
                 let {product_name, price, image_url, product_id} = item
 
                 return (
-                        <div key = {index}>
-                            <Product
+                    <div key = {index}>
+                        <Product
                             productName = {product_name}
                             price = {price}
                             imageURL = {image_url}
@@ -26,11 +26,11 @@ class Dashboard extends Component {
                             index = {index}
                             updateProduct = {this.props.updateProduct}
                             delete = {this.props.delete}
-                            />
-                        </div>
+                        />
+                    </div>
                 )
             })
-            return productInfo
+           return productInfo
         }
         else {
             return (

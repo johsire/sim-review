@@ -13,6 +13,7 @@ class App extends Component {
       productInventory:[],
       saveButtonToggle: false,
       addButtonToggle: false,
+      activeProduct: {},
     }
   }
 
@@ -33,10 +34,11 @@ class App extends Component {
 
  
   
-  updateProduct = (key) => {
+  updateProduct = (productInfo) => {
     console.log('i still work')
     this.setState({
-      addButtonToggle: true
+      addButtonToggle: true,
+      activeProduct: productInfo,
     })
   }
 
@@ -50,14 +52,15 @@ class App extends Component {
       <div className="App">
         <Header/>
         <Form
-        addToInventory = {this.addToInventory}
-        saveButtonToggle = {this.state.saveButtonToggle}
-        addButtonToggle = {this.state.addButtonToggle}
+          addToInventory = {this.addToInventory}
+          saveButtonToggle = {this.state.saveButtonToggle}
+          addButtonToggle = {this.state.addButtonToggle}
+          activeProduct = {this.state.activeProduct}
         />
         <Dashboard
-        delete = {this.delete}
-        updateProduct= {this.updateProduct}
-        productInventory = {this.state.productInventory}
+          delete = {this.delete}
+          updateProduct= {this.updateProduct}
+          productInventory = {this.state.productInventory}
 
         />
       </div>
