@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Product from '../Product/Product';
 
 class Form extends Component {
     constructor (props) {
@@ -11,7 +12,19 @@ class Form extends Component {
             addButtonToggle: false,
         }
         this.handleChange = this.handleChange.bind(this)
-    }
+    };
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.activeProduct.product_id !== this.props.activeProduct.product_id){
+            const { imageURL, price } = this.props.activeProduct
+
+            this.setState({
+                imageURL: this.imageURL,
+                pName: productName,
+                pPrice: price,
+            });
+        };
+    };
 
     handleChange (val) {
         this.setState({
@@ -29,14 +42,12 @@ class Form extends Component {
             pName: '',
             pPrice: '',
             addButtonToggle: false
-        })
-    
-    }
+        });
+    };
 
-    
-    
+
     render () {
-        // console.log('hi', this.state)
+        console.log('form props', this.props);
         return (
             <div>
                 <h1>Form</h1>
