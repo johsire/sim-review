@@ -16,10 +16,10 @@ class Form extends Component {
 
     componentDidUpdate(prevProps) {
         if(prevProps.activeProduct.product_id !== this.props.activeProduct.product_id){
-            const { imageURL, price } = this.props.activeProduct
+            const { imageURL, price, productName} = this.props.activeProduct
 
             this.setState({
-                imageURL: this.imageURL,
+                imageURL: imageURL,
                 pName: productName,
                 pPrice: price,
             });
@@ -45,6 +45,32 @@ class Form extends Component {
         });
     };
 
+    handleAdd = () => {
+        let {imgURL, pName, pPrice} = this.state
+        // console.log(pName)
+        this.props.addToInventory(imgURL, pName, pPrice)
+        this.setState({
+                imgURL: '',
+                pName: '',
+                pPrice: ''
+        })
+    };
+
+    handleButtonPush = () => {
+        let {imgURL, pName, pPrice} = this.state
+
+        let updateInfo = {
+            imgURL,
+            pName,
+            pPrice,
+            id: this.props.activeProduct.product_id
+        };
+
+        this.props.addButtonToggle ?
+        this.props.editProduct(updateInfo)
+        :
+        this.handleAdd()
+    };
 
     render () {
         console.log('form props', this.props);
@@ -69,33 +95,21 @@ class Form extends Component {
                 <div>
                     <h4>Price:</h4>
                     <input
-                        value = {this.state.pPrice} 
-                        onChange = {this.handleChange}
+                        value = { this.state.pPrice } 
+                        onChange = { this.handleChange }
                         name = 'pPrice'/>
                 </div>
                     <button
-                        onClick = {this.handleCancel}
+                        onClick = { this.handleCancel }
                     >Cancel
                     </button>
                     <button
-                        onClick = {() => {
-                            let {imgURL, pName, pPrice} = this.state
-                            // console.log(pName)
-                            this.props.addToInventory(imgURL, pName, pPrice)
-                             this.setState({
-                                    imgURL: '',
-                                    pName: '',
-                                    pPrice: ''
-                            })
-                            
-                        }}
-                    >{
-                        this.props.addButtonToggle
+                        onClick = { handleButtonPush } >
+                        { this.props.addButtonToggle
                         ?
                         'Save Changes'
                         :
-                        'Add Item'
-                    }
+                        'Add Item' }
                     </button> 
                      <hr/>  
                 </div>

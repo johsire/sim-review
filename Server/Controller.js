@@ -40,12 +40,7 @@ module.exports = {
 
     },
 
-    // updateProduct: (req, res) => {
-    //     let {str, index} = req.body
-    //     console.log({str, index})
-    // }
-
-
-
-
-}
+    updateProduct: (req, res) => {
+        console.log(req.body)
+    }
+};

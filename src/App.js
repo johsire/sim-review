@@ -40,7 +40,14 @@ class App extends Component {
       addButtonToggle: true,
       activeProduct: productInfo,
     })
-  }
+  };
+
+  editProduct = (updatedProductInfo) => {
+    axios.put('/api/product', updatedProductInfo)
+         .then(res => this.setState({ 
+           productInventory: res.data 
+      }));
+  };
 
   delete = (id) => {
     axios.delete(`/api/products/${id}`)
@@ -56,6 +63,7 @@ class App extends Component {
           saveButtonToggle = {this.state.saveButtonToggle}
           addButtonToggle = {this.state.addButtonToggle}
           activeProduct = {this.state.activeProduct}
+          editProduct = {this.state.editProduct}
         />
         <Dashboard
           delete = {this.delete}
