@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Product from '../Product/Product'
 
 class Dashboard extends Component {
@@ -14,23 +14,22 @@ class Dashboard extends Component {
         let{productInventory} = this.props
         if (productInventory.length > 0) {
             let productInfo = productInventory.map((item, index) => {
-                let {product_name, price, image_url, product_id} = item
+                let {product_name, price, image_url,product_id} = item
 
                 return (
-                    <div key = {index}>
-                        <Product
+                        <div key = {index}>
+                            <Product
                             productName = {product_name}
                             price = {price}
                             imageURL = {image_url}
-                            product_id = { product_id }
-                            index = {index}
+                            product_id = {product_id}
                             updateProduct = {this.props.updateProduct}
                             delete = {this.props.delete}
-                        />
-                    </div>
+                            />
+                        </div>
                 )
             })
-           return productInfo
+            return productInfo
         }
         else {
             return (
@@ -40,6 +39,6 @@ class Dashboard extends Component {
             )
         }
     }
-}
+};
 
-export default Dashboard
+export default Dashboard;

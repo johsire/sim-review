@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Product from '../Product/Product';
 
 class Form extends Component {
     constructor (props) {
@@ -14,16 +13,15 @@ class Form extends Component {
         this.handleChange = this.handleChange.bind(this)
     };
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps){
         if(prevProps.activeProduct.product_id !== this.props.activeProduct.product_id){
-            const { imageURL, price, productName} = this.props.activeProduct
-
+            const {imageURL,productName,price} = this.props.activeProduct
             this.setState({
-                imageURL: imageURL,
-                pName: productName,
-                pPrice: price,
-            });
-        };
+            imgURL: imageURL,
+            pName: productName,
+            pPrice: price
+            })
+        }
     };
 
     handleChange (val) {
@@ -31,9 +29,8 @@ class Form extends Component {
             [val.target.name]: val.target.value,
             addButtonToggle: true
             
-        })
-        
-    }
+        }) 
+    };
 
     handleCancel = () => {
         // console.log("you canceled!")
@@ -42,38 +39,38 @@ class Form extends Component {
             pName: '',
             pPrice: '',
             addButtonToggle: false
-        });
+        })
     };
 
-    handleAdd = () => {
+    handleAdd = () =>{
         let {imgURL, pName, pPrice} = this.state
         // console.log(pName)
         this.props.addToInventory(imgURL, pName, pPrice)
-        this.setState({
+         this.setState({
                 imgURL: '',
                 pName: '',
                 pPrice: ''
-        })
+         })
     };
 
     handleButtonPush = () => {
         let {imgURL, pName, pPrice} = this.state
 
-        let updateInfo = {
+        let updatedInfo = {
             imgURL,
             pName,
             pPrice,
             id: this.props.activeProduct.product_id
-        };
-
+        }
         this.props.addButtonToggle ?
-        this.props.editProduct(updateInfo)
+        this.props.editProduct(updatedInfo)
         :
         this.handleAdd()
-    };
-
+    };   
+    
+    
     render () {
-        console.log('form props', this.props);
+        console.log('form_props', this.props, 'form_state', this.state)
         return (
             <div>
                 <h1>Form</h1>
@@ -95,21 +92,22 @@ class Form extends Component {
                 <div>
                     <h4>Price:</h4>
                     <input
-                        value = { this.state.pPrice } 
-                        onChange = { this.handleChange }
+                        value = {this.state.pPrice} 
+                        onChange = {this.handleChange}
                         name = 'pPrice'/>
                 </div>
                     <button
-                        onClick = { this.handleCancel }
+                        onClick = {this.handleCancel}
                     >Cancel
                     </button>
-                    <button
-                        onClick = { handleButtonPush } >
-                        { this.props.addButtonToggle
+                    <button onClick = { this.handleButtonPush}  >
+                    {
+                        this.props.addButtonToggle
                         ?
                         'Save Changes'
                         :
-                        'Add Item' }
+                        'Add Item'
+                    }
                     </button> 
                      <hr/>  
                 </div>
@@ -117,4 +115,4 @@ class Form extends Component {
     }
 };
 
-export default Form
+export default Form;

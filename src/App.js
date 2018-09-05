@@ -11,50 +11,44 @@ class App extends Component {
 
     this.state = {
       productInventory:[],
-      saveButtonToggle: false,
       addButtonToggle: false,
-      activeProduct: {},
+      activeProduct:{}
     }
-  }
+  };
 
   componentDidMount () {
     axios.get('/api/inventory')
     .then(res => this.setState({
       productInventory: res.data
     }))
-  }
+  };
 
   addToInventory = (imgURL, pName, pPrice) => {
     axios.post('/api/product', {imgURL: imgURL, pName: pName, pPrice: pPrice})
     .then(res => this.setState({
       productInventory: res.data,
-    }))
-    
-  }
+    })) 
+  };
 
- 
-  
   updateProduct = (productInfo) => {
     console.log('i still work')
     this.setState({
       addButtonToggle: true,
-      activeProduct: productInfo,
+      activeProduct: productInfo
     })
   };
 
   editProduct = (updatedProductInfo) => {
-    axios.put('/api/product', updatedProductInfo)
-         .then(res => this.setState({ 
-           productInventory: res.data 
-      }));
+    axios.put('/api/product',updatedProductInfo).then(res => this.setState({productInventory: res.data}))
   };
 
   delete = (id) => {
-    axios.delete(`/api/products/${id}`)
-         .then(res => this.setState({ productInventory: res.data }))
+    console.log(id)
+    axios.delete(`/api/products/${id}`).then(res => this.setState({productInventory: res.data}))
   };
   
   render() {
+    console.log('app state', this.state)
     return (
       <div className="App">
         <Header/>
@@ -62,18 +56,17 @@ class App extends Component {
           addToInventory = {this.addToInventory}
           saveButtonToggle = {this.state.saveButtonToggle}
           addButtonToggle = {this.state.addButtonToggle}
-          activeProduct = {this.state.activeProduct}
-          editProduct = {this.state.editProduct}
+          activeProduct={this.state.activeProduct}
+          editProduct={this.editProduct}
         />
         <Dashboard
           delete = {this.delete}
           updateProduct= {this.updateProduct}
           productInventory = {this.state.productInventory}
-
         />
       </div>
     );
   }
-}
+};
 
 export default App;
