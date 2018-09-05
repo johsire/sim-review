@@ -37,7 +37,6 @@ module.exports = {
 
         // res.status(200).send()
         console.log(pName)
-
     },
 
     updateProduct: (req, res) => {
