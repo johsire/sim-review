@@ -41,6 +41,14 @@ module.exports = {
     },
 
     updateProduct: (req, res) => {
+        const db = req.app.get('db');
+        const { pName, pPrice, imgURL, id } = req.body
         console.log(req.body)
+
+        db.update_item([pName, pPrice, imgURL, id])
+          .then(inventory => res.status(200).send(inventory))
+          .catch(err => {
+              res.status(500).send('errrrrrooorrrr!! from back-end!')
+          });
     }
 };
