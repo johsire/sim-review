@@ -41,9 +41,9 @@ class App extends Component {
   }
 
   delete = (id) => {
-    console.log(id)
     axios.delete(`/api/products/${id}`)
-  }
+         .then(res => this.setState({ productInventory: res.data }))
+  };
   
   render() {
     return (

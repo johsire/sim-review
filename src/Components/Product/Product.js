@@ -2,7 +2,7 @@ import React from 'react'
 import '../../App.css'
 
 function Product(props) {
-    let { index, productName, price, imageURL, } = props
+    let { proudct_id, productName, price, imageURL, } = props
 
     console.log('product', props)
     return (
@@ -17,7 +17,7 @@ function Product(props) {
                     onClick={props.updateProduct}
                 >Edit</button>
                 <button
-                    onClick={() => { props.delete(index) }}
+                    onClick={() => { props.delete(proudct_id) }}
                 >Delete</button>
             </div>
 

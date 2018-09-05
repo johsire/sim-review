@@ -13,7 +13,15 @@ module.exports = {
     },
 
     delete: (req, res) => {
-        console.log(req.params)
+        const db = req.app.get('db')
+        const { id } = req.params;
+
+        db.delete_item([id])
+          .then(inventory => res.status(200).send(inventory))
+          .catch(err => {
+              console.log(err, 'Error from backend')
+              res.status(500).send('Internal Server Error');
+        });
     },
 
     addItem: (req, res) => {
